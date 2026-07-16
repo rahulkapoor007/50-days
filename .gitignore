@@ -1,0 +1,6 @@
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Keep originals local — site uses optimized copies in assets/web/
+Images/

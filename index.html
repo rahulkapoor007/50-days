@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Rahul & Ankita — 50 Days</title>
+    <meta
+      name="description"
+      content="Fifty days of Rahul Kapoor & Ankita Oberoi — a scroll-told story."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="is-curtain-locked is-gate-locked">
+    <!-- Password gate -->
+    <div class="gate" data-gate aria-hidden="false">
+      <div class="gate__mood" data-gate-mood aria-hidden="true"></div>
+      <div class="gate__card" data-gate-card>
+        <p class="gate__eyebrow">A private door</p>
+        <h1 class="gate__title">This story opens only for the one who knows.</h1>
+        <blockquote class="gate__riddle">
+          <p>I never sat on a calendar.</p>
+          <p>Nobody else circled me in red.</p>
+          <p>Still, someone counted me — quietly — every single day.</p>
+          <p>And today, I finally became whole.</p>
+          <p class="gate__ask">What am I?</p>
+        </blockquote>
+        <form class="gate__form" data-gate-form>
+          <label class="gate__label" for="gate-pass">Your answer</label>
+          <input
+            id="gate-pass"
+            class="gate__input"
+            data-gate-input
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Whisper it here…"
+            required
+          />
+          <button type="submit" class="gate__btn">Open the door</button>
+        </form>
+        <p class="gate__feedback" data-gate-feedback aria-live="polite">
+          Listen to the riddle. The answer is already in the story.
+        </p>
+        <div class="gate__meter" aria-hidden="true">
+          <span class="gate__meter-fill" data-gate-meter></span>
+        </div>
+        <p class="gate__heart" data-gate-heart aria-hidden="true">♡</p>
+      </div>
+    </div>
+
+    <!-- Curtain raiser -->
+    <div class="curtain is-waiting" data-curtain aria-hidden="true">
+      <div class="curtain__panel curtain__panel--left" aria-hidden="true"></div>
+      <div class="curtain__panel curtain__panel--right" aria-hidden="true"></div>
+      <div class="curtain__glow" aria-hidden="true"></div>
+      <div class="curtain__stage">
+        <p class="curtain__eyebrow" data-curtain-line>A private showing</p>
+        <h1 class="curtain__title" data-curtain-line>Rahul &amp; Ankita</h1>
+        <p class="curtain__sub" data-curtain-line>Fifty days. One story waiting behind the curtain.</p>
+        <button type="button" class="curtain__btn" data-curtain-open data-curtain-line>
+          Raise the curtain
+        </button>
+        <p class="curtain__hint" data-curtain-line>Sound on for the full entrance</p>
+      </div>
+    </div>
+
+    <!-- 50-day milestone celebration -->
+    <div class="milestone" data-milestone aria-hidden="true" hidden>
+      <canvas class="milestone__confetti" data-confetti aria-hidden="true"></canvas>
+      <div class="milestone__burst milestone__burst--left" aria-hidden="true"></div>
+      <div class="milestone__burst milestone__burst--right" aria-hidden="true"></div>
+      <div class="milestone__content">
+        <p class="milestone__eyebrow">Milestone unlocked</p>
+        <p class="milestone__badge">50</p>
+        <h2 class="milestone__title">Days together</h2>
+        <p class="milestone__text">
+          May 28 → July 16. Calls, sunflowers, songs, family, roka — and a love
+          that already feels like forever.
+        </p>
+        <button type="button" class="milestone__btn" data-milestone-continue>
+          Begin our story
+        </button>
+      </div>
+    </div>
+
+    <div class="site-shell" data-site>
+    <div class="ambient" aria-hidden="true">
+      <div class="ambient__orb ambient__orb--a"></div>
+      <div class="ambient__orb ambient__orb--b"></div>
+      <div class="ambient__orb ambient__orb--c"></div>
+      <canvas class="ambient__canvas" data-particles></canvas>
+    </div>
+
+    <div class="cursor-glow" data-cursor aria-hidden="true"></div>
+
+    <div class="progress" aria-hidden="true">
+      <div class="progress__bar" data-progress-bar></div>
+    </div>
+
+    <header class="nav" data-nav>
+      <span class="nav__brand">Rahul &amp; Ankita</span>
+      <span class="nav__meta">50 days</span>
+    </header>
+
+    <div class="bgm-player" data-bgm-player aria-hidden="true">
+      <button
+        type="button"
+        class="bgm-player__btn"
+        data-bgm-toggle
+        aria-label="Pause background music"
+        aria-pressed="true"
+      >
+        <span class="bgm-player__icon bgm-player__icon--pause" aria-hidden="true">❚❚</span>
+        <span class="bgm-player__icon bgm-player__icon--play" aria-hidden="true">▶</span>
+      </button>
+      <span class="bgm-player__label" data-bgm-label>Music</span>
+    </div>
+
+    <main>
+      <!-- Scene 1: Opening -->
+      <section class="scene scene--dark" data-scene data-steps="4" style="--scene-h: 380vh">
+        <div class="scene__pin">
+          <div class="scene__stage">
+            <div class="scene__media scene__media--bleed" data-layer>
+              <div class="scene__frame">
+                <img
+                  data-frame="0"
+                  class="is-active"
+                  src="assets/web/hero-roka.jpg"
+                  alt=""
+                  fetchpriority="high"
+                />
+                <img data-frame="1" src="assets/web/roka-couple.jpg" alt="" />
+                <img data-frame="2" src="assets/web/highway-selfie.jpg" alt="" />
+                <img data-frame="3" src="assets/web/birthday-sukhn.jpg" alt="" />
+              </div>
+            </div>
+            <div class="scene__veil"></div>
+            <div class="scene__copy scene__copy--center">
+              <div class="beat-stack">
+              <div class="beat" data-phrase="0">
+                <h2 class="phrase">Rahul &amp; Ankita</h2>
+                <p class="body">
+                  Two software engineers — the same campus, just different years —
+                  whose parents found each other, and whose story began even
+                  before their parents tried to meet them.
+                </p>
+              </div>
+              <div class="beat" data-phrase="1">
+                <h2 class="phrase phrase--sub">Fifty days.</h2>
+                <p class="body">
+                  From one message on May 28 to fifty days of unforgettable memories
+                  by July 16—a journey filled with conversations, long drives, family
+                  blessings, thoughtful surprises, beautiful songs, and the beginning 
+                  of our forever.
+                </p>
+              </div>
+              <div class="beat" data-phrase="2">
+                <h2 class="phrase phrase--sub">One story.</h2>
+                <p class="body">
+                  It isn’t a highlight reel. It’s every small ordinary thing that
+                  turned into a memory sunflowers, handwritten notes, late
+                  dinners, and the courage of saying yes.
+                </p>
+              </div>
+              <div class="beat" data-phrase="3">
+                <h2 class="phrase phrase--sub">Told as it unfolded.</h2>
+                <p class="body">
+                  Scroll slowly. Each chapter holds a moment from how Rahul and
+                  Ankita found their way to each other.
+                </p>
+              </div>
+              </div>
+            </div>
+            <p class="scene__scrollcue" data-scrollcue>Scroll</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Memory loader bridge -->
+      <section
+        class="memory-loader"
+        data-memory-loader
+        style="--loader-h: 220vh"
+        aria-label="Loading fifty days of memories"
+      >
+        <div class="memory-loader__pin">
+          <div class="memory-loader__inner">
+            <p class="memory-loader__eyebrow">Just a moment</p>
+            <h2 class="memory-loader__title">Loading 50 days of memories</h2>
+            <div class="memory-loader__ring" aria-hidden="true">
+              <svg viewBox="0 0 120 120">
+                <circle class="memory-loader__track" cx="60" cy="60" r="52"></circle>
+                <circle class="memory-loader__progress" data-loader-ring cx="60" cy="60" r="52"></circle>
+              </svg>
+              <div class="memory-loader__count">
+                <span data-loader-day>0</span>
+                <small>/ 50</small>
+              </div>
+            </div>
+            <p class="memory-loader__phrase" data-loader-phrase>Opening the first page…</p>
+            <div class="memory-loader__bar" aria-hidden="true">
+              <span data-loader-bar></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Engage: counters -->
+      <section class="interlude interlude--counters" data-interlude>
+        <div class="interlude__inner">
+          <p class="eyebrow is-active">In these fifty days</p>
+          <div class="counters" data-counters>
+            <article class="counter">
+              <p class="counter__num" data-count="50">0</p>
+              <p class="counter__label">days together</p>
+            </article>
+            <article class="counter">
+              <p class="counter__num" data-count="62">0</p>
+              <p class="counter__label">minutes in the first call</p>
+            </article>
+            <article class="counter">
+              <p class="counter__num" data-count="4">0</p>
+              <p class="counter__label">times she sang</p>
+              <p class="counter__swap" aria-hidden="true">
+                <span>Khat &amp; Sitare</span>
+                <span>twice each</span>
+              </p>
+            </article>
+            <article class="counter">
+              <p class="counter__num" data-count="6">0</p>
+              <p class="counter__label">notes shared</p>
+              <p class="counter__swap" aria-hidden="true">
+                <span>Rahul · 4</span>
+                <span>Ankita · 2</span>
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scene 2: The beginning -->
+      <section class="scene scene--light" data-scene data-steps="4" style="--scene-h: 360vh">
+        <div class="scene__pin">
+          <div class="scene__stage scene__stage--split">
+            <div class="scene__media scene__media--card scene__media--opening" data-layer>
+              <div class="scene__frame">
+                <img
+                  data-frame="0"
+                  class="is-active"
+                  src="assets/web/first-message.png"
+                  alt="First WhatsApp message between Rahul and Ankita"
+                />
+                <div class="scene__call" data-frame="1" aria-hidden="true">
+                  <div class="scene__call-ring" aria-hidden="true"></div>
+                  <p class="scene__call-label">First call</p>
+                  <p class="scene__call-duration">1 hour 2 minutes</p>
+                  <p class="scene__call-date">May 28, 2026</p>
+                </div>
+                <img
+                  data-frame="2"
+                  src="assets/web/may31-gifts.png"
+                  alt="Sunflowers, Ferrero Rocher, and crochet flowers on May 31"
+                />
+                <img
+                  data-frame="3"
+                  src="assets/web/may31-sunflower-girl.png"
+                  alt="Ankita holding sunflowers on May 31"
+                />
+              </div>
+            </div>
+            <div class="scene__copy scene__copy--side">
+              <p class="eyebrow">May 28, 2026</p>
+              <div class="beat-stack">
+              <div class="beat" data-phrase="0">
+                <h2 class="phrase">The beginning of everything.</h2>
+                <p class="body">
+                  That first message and call on May 28th neither of us knew
+                  that one phone call would change our lives forever.
+                </p>
+                <div class="opening-sequence" aria-hidden="true">
+                  <div class="opening-sequence__step opening-sequence__step--message is-on">
+                    <span class="opening-sequence__icon">💬</span>
+                    <div>
+                      <p class="opening-sequence__title">First WhatsApp message</p>
+                      <p class="opening-sequence__meta">Hey Ankita!! Rahul here…</p>
+                    </div>
+                  </div>
+                  <div class="opening-sequence__step opening-sequence__step--call">
+                    <span class="opening-sequence__icon opening-sequence__icon--ring">📞</span>
+                    <div>
+                      <p class="opening-sequence__title">First call</p>
+                      <p class="opening-sequence__meta">1 hour 2 minutes</p>
+                    </div>
+                  </div>
+                  <div class="opening-sequence__timeline">
+                    <span class="opening-sequence__dot"></span>
+                    <span class="opening-sequence__line"></span>
+                    <span class="opening-sequence__dot"></span>
+                  </div>
+                  <div class="opening-sequence__step opening-sequence__step--heart">
+                    <span class="opening-sequence__heart">♡</span>
+                    <p class="opening-sequence__meta">And something quietly began.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="beat" data-phrase="1">
+                <h2 class="phrase">Then the conversations grew.</h2>
+                <p class="body">
+                  We kept talking for a few days, discovering how easily the
+                  silences filled. Two engineers, one college and
+                  a strange familiarity we hadn’t named yet.
+                </p>
+              </div>
+              <div class="beat" data-phrase="2">
+                <h2 class="phrase">May 31 · Chandigarh</h2>
+                <p class="body body--poem">
+                  That day…<br />
+                  We didn't just meet.<br />
+                  We found home.
+                </p>
+                <p class="body">
+                  I picked you up with sunflowers and Ferrero Rocher and she brought
+                  me a crochet miniature plant (no one has ever gifted me). We drove 
+                  from Ambala toward Chandigarh, spent hours at Sukhna Lake, and later shared ravioli
+                  at Seville, ditching bowling (made a good decision).
+                  right.
+                </p>
+              </div>
+              <div class="beat" data-phrase="3">
+                <h2 class="phrase">We already knew.</h2>
+                <p class="body">
+                  By the time I dropped you home, the feeling was quiet and clear:
+                  we were perfect for each other. Looking back, we had already
+                  crossed paths at my cousin sister’s wedding before our parents
+                  ever tried to arrange this meeting (And sorry for not making the
+                  move before 6 months).
+                </p>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Engage: memory quiz -->
+      <section class="interlude" data-interlude>
+        <div class="interlude__inner interlude__inner--narrow">
+          <p class="eyebrow is-active">Memory check</p>
+          <div class="quiz" data-quiz data-quiz-gate>
+            <p class="quiz__q">How long was Rahul &amp; Ankita’s first call on May&nbsp;28?</p>
+            <div class="quiz__options">
+              <button type="button" class="quiz__btn" data-quiz-option data-correct="false">30 minutes</button>
+              <button type="button" class="quiz__btn" data-quiz-option data-correct="true">1 hour 2 minutes</button>
+              <button type="button" class="quiz__btn" data-quiz-option data-correct="false">2 hours</button>
+            </div>
+            <p class="quiz__hint" data-quiz-hint>Choose the right memory to move ahead.</p>
+            <p class="quiz__reveal" data-quiz-reveal hidden>
+              Right — one hour and two minutes. The first of many conversations that stitched them together.
+            </p>
+            <p class="quiz__unlock" data-quiz-unlock hidden>Unlocked — keep scrolling ↓</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scene 3: Families & dates -->
+      <section class="scene scene--soft" data-scene data-steps="4" style="--scene-h: 380vh">
+        <div class="scene__pin">
+          <div class="scene__stage scene__stage--split">
+            <div class="scene__media scene__media--card" data-layer>
+              <div class="scene__frame">
+                <img
+                  data-frame="0"
+                  class="is-active"
+                  src="assets/web/june8-gifts.jpg"
+                  alt=""
+                />
+                <img data-frame="1" src="assets/web/villagio-selfie.jpg" alt="" class="scene__duo-main" />
+                <img data-frame="1" src="assets/web/villagio-bracelets.png" alt="" class="scene__duo-accent" />
+                <img data-frame="2" src="assets/web/highway-selfie.jpg" alt="" />
+                <img data-frame="3" src="assets/web/june28-sunflowers.jpg" alt="" />
+              </div>
+            </div>
+            <div class="scene__copy scene__copy--side">
+              <p class="eyebrow">June</p>
+              <div class="beat-stack">
+              <div class="beat" data-phrase="0">
+                <h2 class="phrase">When our homes met</h2>
+                <p class="body">
+                  On June 6 your parents visited my house — warm conversation, and
+                  a clear yes to go further (I know how difficult those two hours must
+                  have been for you.). On June 8 my parents visited yours, met Ankita
+                  for the first time, liked her instantly, exchanged sweets, and gave
+                  shagun to both of us.
+                </p>
+                <div class="families-flow" data-families-flow>
+                  <div class="families-flow__timeline">
+                    <div class="families-flow__step"><span>6 June</span><small>Your parents visited.</small></div>
+                    <div class="families-flow__arrow" aria-hidden="true">↓</div>
+                    <div class="families-flow__step"><span>8 June</span><small>Mine parents visited.</small></div>
+                    <div class="families-flow__arrow" aria-hidden="true">↓</div>
+                    <div class="families-flow__step"><span>Shagun</span></div>
+                    <div class="families-flow__arrow" aria-hidden="true">↓</div>
+                    <div class="families-flow__step"><span>Sweets exchanged</span></div>
+                    <div class="families-flow__arrow" aria-hidden="true">↓</div>
+                    <div class="families-flow__step families-flow__step--finale"><span>Everyone smiled.</span></div>
+                  </div>
+                  <div class="families-trees" aria-hidden="true">
+                    <svg class="families-trees__tree families-trees__tree--left" viewBox="0 0 80 120" aria-hidden="true">
+                      <path d="M40 18c-6 12-16 18-26 22 10 2 18 8 24 16 2-12 8-22 18-28-12 3-20 10-26 20 6-10 16-16 28-18-10 6-16 16-18 28 6-10 14-14 26-16-10-4-18-10-26-22z" fill="#6b9b6e"/>
+                      <rect x="36" y="52" width="8" height="48" rx="2" fill="#8b6914"/>
+                    </svg>
+                    <svg class="families-trees__heart" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 21s-8-5.4-8-11.2C4 6.6 6.8 4 10 4c1.8 0 3.4.9 4.4 2.3C15.4 4.9 17 4 18.8 4 22 4 24.8 6.6 24.8 9.8 24.8 15.6 16.8 21 12 21z" fill="#c45c6a"/>
+                    </svg>
+                    <svg class="families-trees__tree families-trees__tree--right" viewBox="0 0 80 120" aria-hidden="true">
+                      <path d="M40 18c-6 12-16 18-26 22 10 2 18 8 24 16 2-12 8-22 18-28-12 3-20 10-26 20 6-10 16-16 28-18-10 6-16 16-18 28 6-10 14-14 26-16-10-4-18-10-26-22z" fill="#7aad7d"/>
+                      <rect x="36" y="52" width="8" height="48" rx="2" fill="#8b6914"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="beat" data-phrase="1">
+                <h2 class="phrase">Villagio, Zirakpur</h2>
+                <p class="body">
+                  Our second date. I gifted you a Stanley mug engraved with her
+                  name (which I didn't liked). She brought matching heart bracelets
+                  two halves that complete only when we are together and a peanut butter for me.
+                  She fed me for the first time. In the car, I made you wear the
+                  anklet as your feet rested on my lap (that was the best moment).
+                </p>
+              </div>
+              <div class="beat" data-phrase="2">
+                <h2 class="phrase">Highway Hut</h2>
+                <p class="body">
+                  We met secretly near your house. For the first time you rested
+                  your head on my shoulder — the softest kind of trust.
+                </p>
+              </div>
+              <div class="beat" data-phrase="3">
+                <h2 class="phrase">One month · Sunflowers again</h2>
+                <p class="body">
+                  After a difficult June 27, we found our way back. Dress
+                  shopping for the roka, then Havana Tap House. You gave an angry
+                  soft toy for making you angry but i promise this won't happen ever again
+                  (This would be turned to smiling face by you only, will be waiting for you).
+                  I brought sunflowers to recreate the first day and a handwritten note. 
+                  For the first time I rested my head on your shoulder and it felt good.
+                </p>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Engage: every date -->
+      <section class="interlude interlude--dates" data-interlude>
+        <div class="interlude__inner">
+          <p class="eyebrow is-active">Every date was special</p>
+          <h2 class="interlude__title">Six evenings, six chapters</h2>
+          <p class="interlude__text">
+            Tap each date to revisit where the story grew — from Sukhna to the
+            movie hall.
+          </p>
+          <div class="dates-timeline" data-dates-timeline>
+            <button type="button" class="dates-timeline__item is-active" data-date="0">
+              <span class="dates-timeline__num">Date 1</span>
+              <span class="dates-timeline__label">Sukhna Lake</span>
+            </button>
+            <button type="button" class="dates-timeline__item" data-date="1">
+              <span class="dates-timeline__num">Date 2</span>
+              <span class="dates-timeline__label">Villagio</span>
+            </button>
+            <button type="button" class="dates-timeline__item" data-date="2">
+              <span class="dates-timeline__num">Date 3</span>
+              <span class="dates-timeline__label">Highway Hut</span>
+            </button>
+            <button type="button" class="dates-timeline__item" data-date="3">
+              <span class="dates-timeline__num">Date 4</span>
+              <span class="dates-timeline__label">Havana Tap House</span>
+            </button>
+            <button type="button" class="dates-timeline__item" data-date="4">
+              <span class="dates-timeline__num">Date 5</span>
+              <span class="dates-timeline__label">NH1</span>
+            </button>
+            <button type="button" class="dates-timeline__item" data-date="5">
+              <span class="dates-timeline__num">Date 6</span>
+              <span class="dates-timeline__label">Movie Night · Alpha</span>
+            </button>
+          </div>
+          <div class="dates-timeline__detail" data-dates-detail>
+            <p class="dates-timeline__detail-text" data-dates-detail-text>
+              May 31 — sunflowers, lake breeze, and the day we found home.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Engage: date videos -->
+      <section class="interlude" data-interlude>
+        <div class="interlude__inner">
+          <p class="eyebrow is-active">Press play on the days</p>
+          <h2 class="interlude__title">Villagio &amp; Highway Hut</h2>
+          <p class="interlude__text">
+            Tap a clip to unmute. These are the evenings when bracelets met, heads found
+            shoulders, and the story stopped being only words.
+          </p>
+          <div class="clip-grid">
+            <figure class="clip" data-clip>
+              <video
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="assets/web/villagio-selfie.jpg"
+              >
+                <source src="assets/web/villagio-video.mp4" type="video/mp4" />
+              </video>
+              <figcaption>
+                <span>Villagio · June 12</span>
+                <button type="button" class="clip__sound" data-sound>Tap for sound</button>
+              </figcaption>
+            </figure>
+            <figure class="clip" data-clip>
+              <video
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="assets/web/highway-selfie.jpg"
+              >
+                <source src="assets/web/highway-video.mp4" type="video/mp4" />
+              </video>
+              <figcaption>
+                <span>Highway Hut · June 23</span>
+                <button type="button" class="clip__sound" data-sound>Tap for sound</button>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scene 4: Songs & notes -->
+      <section class="scene scene--light" data-scene data-steps="3" style="--scene-h: 300vh">
+        <div class="scene__pin">
+          <div class="scene__stage scene__stage--split">
+            <div class="scene__media scene__media--card scene__media--note" data-layer>
+              <div class="scene__frame scene__frame--contain">
+                <img
+                  data-frame="0"
+                  class="is-active"
+                  src="assets/web/station-note.png"
+                  alt="Handwritten note at the station with Ferrero Rocher"
+                />
+                <div class="song-tile" data-frame="1" aria-hidden="true">
+                  <button
+                    type="button"
+                    class="song-tile__play"
+                    data-song-media="assets/web/khat.mp3"
+                    data-song-kind="audio"
+                    aria-label="Play Khat"
+                  >
+                    <span class="song-tile__ring" aria-hidden="true"></span>
+                    <span class="song-tile__icon" aria-hidden="true">♪</span>
+                    <span class="song-tile__label">Khat</span>
+                  </button>
+                </div>
+                <div class="song-tile" data-frame="2" aria-hidden="true">
+                  <button
+                    type="button"
+                    class="song-tile__play"
+                    data-song-media="assets/web/sitare.mp3"
+                    data-song-kind="audio"
+                    aria-label="Play Sitare"
+                  >
+                    <span class="song-tile__ring" aria-hidden="true"></span>
+                    <span class="song-tile__icon" aria-hidden="true">♪</span>
+                    <span class="song-tile__label">Sitare</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="scene__copy scene__copy--side">
+              <p class="eyebrow">Notes &amp; songs</p>
+              <div class="beat-stack">
+              <div class="beat" data-phrase="0">
+                <h2 class="phrase">I would be missing you</h2>
+                <p class="body">
+                  On June 14 you left for Noida. At the station I packed snacks
+                  and handed you my first handwritten note — two lines saying I
+                  would miss you. On June 19 pink lilies arrived with a second
+                  note, opened in front of your colleagues.
+                </p>
+              </div>
+              <div class="beat" data-phrase="1">
+                <h2 class="phrase">She sang <em>Khat</em></h2>
+                <p class="body">
+                  On the morning of June 15 I woke to a voice recording. Ankita
+                  had sung for me. No girl had ever done that before — and I felt
+                  it in my heart before I could even find the words.
+                </p>
+                <p class="body body--hint">Tap the icon to hear her voice.</p>
+              </div>
+              <div class="beat" data-phrase="2">
+                <h2 class="phrase">Then <em>Sitare</em></h2>
+                <p class="body">
+                  On July 2 you sent a digital handwritten note. On July 4 you
+                  sang <em>Sitare</em> again — a video song that made me feel so
+                  special — once on a recording, once in person. Goosebumps, then
+                  that feeling of being on cloud nine. Two songs, four times her
+                  voice found him.
+                </p>
+                <p class="body body--hint">Tap the icon to hear Sitare.</p>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Engage: songs + reveals -->
+      <section class="interlude" data-interlude>
+        <div class="interlude__inner">
+          <p class="eyebrow is-active">Her voice</p>
+          <h2 class="interlude__title">Two songs. Four times.</h2>
+          <p class="interlude__text">
+            <em>Khat</em> and <em>Sitare</em> — each sung once on a recording and
+            once in person. Tap for sound when you’re ready.
+          </p>
+          <div class="clip-grid">
+            <figure class="clip" data-clip>
+              <video
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="assets/web/digi-note.png"
+              >
+                <source src="assets/web/song1.mov" type="video/mp4" />
+              </video>
+              <figcaption>
+                <span>Khat · June 15</span>
+                <button type="button" class="clip__sound" data-sound>Tap for sound</button>
+              </figcaption>
+            </figure>
+            <figure class="clip" data-clip>
+              <video
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="assets/web/june28-selfie.jpg"
+              >
+                <source src="assets/web/song2-sitare.mp4" type="video/mp4" />
+              </video>
+              <figcaption>
+                <span>Sitare · July 4</span>
+                <button type="button" class="clip__sound" data-sound>Tap for sound</button>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="reveals" data-reveals>
+            <button type="button" class="reveal-card" data-reveal>
+              <span class="reveal-card__front">Tap — first song</span>
+              <span class="reveal-card__back">Khat — the first time anyone sang for me.</span>
+            </button>
+            <button type="button" class="reveal-card" data-reveal>
+              <span class="reveal-card__front">Tap — second song</span>
+              <span class="reveal-card__back">Sitare — a video song that made me feel so special.</span>
+            </button>
+            <button type="button" class="reveal-card" data-reveal>
+              <span class="reveal-card__front">Tap — a quiet first</span>
+              <span class="reveal-card__back">Your head on my shoulder at Highway Hut.</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scene 5: Mehndi -->
+      <section class="scene scene--warm" data-scene data-steps="3" style="--scene-h: 300vh">
+        <div class="scene__pin">
+          <div class="scene__stage scene__stage--split">
+            <div class="scene__media scene__media--card" data-layer>
+              <div class="scene__frame">
+                <img
+                  data-frame="0"
+                  class="is-active"
+                  src="assets/web/mehndi-couple.jpg"
+                  alt=""
+                />
+                <img data-frame="1" src="assets/web/trishul.png" alt="Trishul — a Monday for Shiv" />
+                <img data-frame="2" src="assets/web/roka-portrait.jpg" alt="" />
+              </div>
+            </div>
+            <div class="scene__copy scene__copy--side">
+              <p class="eyebrow">July 5–6</p>
+              <div class="beat-stack">
+              <div class="beat" data-phrase="0">
+                <h2 class="phrase">Mehndi &amp; my name</h2>
+                <p class="body">
+                  You went for mehndi; I slipped away to meet you. It was a
+                  mixed, tender feeling — writing my name into the art on your
+                  hands, already smelling of tomorrow’s vows.
+                </p>
+              </div>
+              <div class="beat" data-phrase="1">
+                <h2 class="phrase">A Monday for Shiv</h2>
+                <p class="body">
+                  We shifted the roka to Monday because we are both Shiv bhakt.
+                  Ankita had kept sixteen Somvaar vrat for a better husband —
+                  and somehow every delay before that day only made the arrival
+                  feel more certain.
+                </p>
+              </div>
+              <div class="beat" data-phrase="2">
+                <h2 class="phrase">Then we became us</h2>
+                <p class="body">
+                  Shopping, fittings, family plans, nerves, relief — all of it
+                  led here. The next morning was not only ceremony. It was the
+                  day our private story became a public promise.
+                </p>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scene 6: Roka cinematic -->
+      <section class="scene scene--dark" data-scene data-steps="5" style="--scene-h: 450vh">
+        <div class="scene__pin">
+          <div class="scene__stage">
+            <div class="scene__media scene__media--bleed" data-layer data-scale>
+              <div class="scene__frame">
+                <img
+                  data-frame="0"
+                  class="is-active"
+                  src="assets/web/roka-couple.jpg"
+                  alt=""
+                />
+                <img data-frame="1" src="assets/web/hero-roka.jpg" alt="" />
+                <img data-frame="2" src="assets/web/roka-rokafied.png" alt="" />
+                <img data-frame="3" src="assets/web/roka-6645.jpg" alt="" />
+                <img data-frame="4" src="assets/web/roka-6118.jpg" alt="" />
+              </div>
+            </div>
+            <div class="scene__veil"></div>
+            <div class="scene__copy scene__copy--center">
+              <p class="eyebrow eyebrow--light">July 6 · Roka</p>
+              <div class="beat-stack">
+              <div class="beat" data-phrase="0">
+                <h2 class="phrase">Better Together</h2>
+                <p class="body">
+                  I picked you up from the parlour. The makeup artist filmed my
+                  reaction — and under the “Better Together” wall, the day we
+                  had waited for finally arrived.
+                </p>
+              </div>
+              <div class="beat" data-phrase="1">
+                <h2 class="phrase phrase--sub">A necklace in the roses</h2>
+                <p class="body">
+                  Inside a rose bouquet I hid our initials necklace. You plucked
+                  it out and looked astonished — one of those seconds you never
+                  want to forget.
+                </p>
+              </div>
+              <div class="beat" data-phrase="2">
+                <h2 class="phrase phrase--sub">Rokafied — then midnight</h2>
+                <p class="body">
+                  We cut the ceremony cake… and then the clock tipped into my
+                  birthday. Balloons, photographs, cake, a written note, flowers
+                  — a full surprise tray I never saw coming.
+                </p>
+              </div>
+              <div class="beat" data-phrase="3">
+                <h2 class="phrase phrase--sub">
+                  <img class="beat-icon" src="assets/web/airpods-icon.png" alt="" width="72" height="72" />
+                  AirPods Pro 3
+                </h2>
+                <p class="body">
+                  You gifted me AirPods Pro 3. I had never received anything like
+                  that from someone before. In that moment it felt like someone
+                  finally existed for me, too.
+                </p>
+              </div>
+              <div class="beat" data-phrase="4">
+                <h2 class="phrase phrase--sub">Photos, laughter, home</h2>
+                <p class="body">
+                  We had a photoshoot, soaked in the noise and sweetness of
+                  family, and came back knowing the hardest and happiest day had
+                  somehow gone right.
+                </p>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Engage: roka videos -->
+      <section class="interlude interlude--dark" data-interlude>
+        <div class="interlude__inner">
+          <p class="eyebrow eyebrow--light is-active">July 6 · caught on camera</p>
+          <h2 class="interlude__title">Roka moments</h2>
+          <p class="interlude__text">
+            From the parlour reaction to the celebration — unmute when you want
+            the room to come alive.
+          </p>
+          <div class="clip-grid clip-grid--three">
+            <figure class="clip" data-clip>
+              <video
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="assets/web/roka-couple.jpg"
+              >
+                <source src="assets/web/parlour-pickup.mp4" type="video/mp4" />
+              </video>
+              <figcaption>
+                <span>Picking her up from the parlour</span>
+                <button type="button" class="clip__sound" data-sound>Tap for sound</button>
+              </figcaption>
+            </figure>
+            <figure class="clip" data-clip>
+              <video
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="assets/web/roka-couple.jpg"
+              >
+                <source src="assets/web/roka-video-1.mp4" type="video/mp4" />
+              </video>
+              <figcaption>
+                <span>Roka ceremony</span>
+                <button type="button" class="clip__sound" data-sound>Tap for sound</button>
+              </figcaption>
+            </figure>
+            <figure class="clip" data-clip>
+              <video
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="assets/web/hero-roka.jpg"
+              >
+                <source src="assets/web/roka-video-2.mp4" type="video/mp4" />
+              </video>
+              <figcaption>
+                <span>Better Together</span>
+                <button type="button" class="clip__sound" data-sound>Tap for sound</button>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="quiz quiz--dark" data-quiz data-quiz-gate>
+            <p class="quiz__q">What was hidden inside the rose bouquet?</p>
+            <div class="quiz__options">
+              <button type="button" class="quiz__btn" data-quiz-option data-correct="false">AirPods</button>
+              <button type="button" class="quiz__btn" data-quiz-option data-correct="true">Their initials necklace</button>
+              <button type="button" class="quiz__btn" data-quiz-option data-correct="false">A ring</button>
+            </div>
+            <p class="quiz__hint" data-quiz-hint>Choose the right memory to move ahead.</p>
+            <p class="quiz__reveal" data-quiz-reveal hidden>
+              Their initials necklace — plucked from the roses with pure shock and joy.
+            </p>
+            <p class="quiz__unlock" data-quiz-unlock hidden>Unlocked — keep scrolling ↓</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scene 7: After -->
+      <section class="scene scene--light" data-scene data-steps="4" style="--scene-h: 360vh">
+        <div class="scene__pin">
+          <div class="scene__stage scene__stage--split scene__stage--flip">
+            <div class="scene__media scene__media--card" data-layer>
+              <div class="scene__frame">
+                <img
+                  data-frame="0"
+                  class="is-active"
+                  src="assets/web/birthday-sukhn.jpg"
+                  alt=""
+                />
+                <img data-frame="1" src="assets/web/movie.jpg" alt="" />
+                <img data-frame="2" src="assets/web/station-gift.jpg" alt="" class="scene__duo-main" />
+                <img data-frame="2" src="assets/web/note-constant.png" alt="" class="scene__duo-accent" />
+                <img data-frame="3" src="assets/web/station-heic.jpg" alt="" />
+              </div>
+            </div>
+            <div class="scene__copy scene__copy--side">
+              <p class="eyebrow">After the roka</p>
+              <div class="beat-stack">
+              <div class="beat" data-phrase="0">
+                <h2 class="phrase">Birthday in Chandigarh</h2>
+                <p class="body">
+                  On July 7 you ordered white roses and a written note before we
+                  left. Street food, Sukhna again, and a long talk in the car —
+                  the first time I felt something deepen into certainty and started
+                  feeling for you. It was a feeling that I won't be able to describe 
+                  in words but I will always remember it.
+                </p>
+              </div>
+              <div class="beat" data-phrase="1">
+                <h2 class="phrase">Alpha &amp; a forehead kiss</h2>
+                <p class="body">
+                  On July 10 we spontaneously went for <em>Alpha</em> at Cosmos
+                  Mall, Zirakpur. I kissed your forehead for the first time —
+                  then dinner at Gola Sizzlers, your first beer in front of me,
+                  and a late scolding from our parents.
+                </p>
+              </div>
+              <div class="beat" data-phrase="2">
+                <h2 class="phrase">Ambala station</h2>
+                <p class="body">
+                  On July 12 I surprised you before your train to Noida — snacks
+                  for the journey, another handwritten note, and the smallest
+                  miniature glass bouquet.
+                </p>
+              </div>
+              <div class="beat" data-phrase="3">
+                <h2 class="phrase">“I miss you”</h2>
+                <p class="body">
+                  You left with mehndi still on your hands and our story already
+                  fifty days in the making — distance again, but no longer as
+                  strangers. But now I started missing you more than ever and 
+                  I started feeling that I want to be with you always.
+                </p>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Engage: firsts -->
+      <section class="interlude" data-interlude>
+        <div class="interlude__inner interlude__inner--narrow">
+          <p class="eyebrow is-active">Collect the firsts</p>
+          <h2 class="interlude__title">Tap each tile</h2>
+          <div class="reveals reveals--grid" data-reveals>
+            <button type="button" class="reveal-card" data-reveal>
+              <span class="reveal-card__front">First date place</span>
+              <span class="reveal-card__back">Sukhna Lake, Chandigarh — May 31</span>
+            </button>
+            <button type="button" class="reveal-card" data-reveal>
+              <span class="reveal-card__front">First forehead kiss</span>
+              <span class="reveal-card__back">During Alpha at Cosmos Mall — July 10</span>
+            </button>
+            <button type="button" class="reveal-card" data-reveal>
+              <span class="reveal-card__front">Flower that returns</span>
+              <span class="reveal-card__back">Sunflowers — day one and the one-month date</span>
+            </button>
+            <button type="button" class="reveal-card" data-reveal>
+              <span class="reveal-card__front">Station surprise</span>
+              <span class="reveal-card__back">Glass bouquet + “I miss you” note — July 12</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery" id="moments">
+        <div class="gallery__intro">
+          <p class="eyebrow">Moments</p>
+          <h2>More to hold still.</h2>
+          <p class="gallery__lede">
+            Keep scrolling the rail for extra photos and clips from Villagio,
+            Highway Hut, mehndi, roka, and the station goodbye.
+          </p>
+        </div>
+        <div class="gallery__rail" data-rail>
+          <figure class="gallery__item">
+            <img src="assets/web/villagio-selfie.jpg" alt="Villagio" />
+          </figure>
+          <figure class="gallery__item gallery__item--video">
+            <video controls playsinline preload="metadata" poster="assets/web/villagio-selfie.jpg">
+              <source src="assets/web/villagio-video.mp4" type="video/mp4" />
+            </video>
+          </figure>
+          <figure class="gallery__item">
+            <img src="assets/web/highway-selfie.jpg" alt="Highway Hut" />
+          </figure>
+          <figure class="gallery__item gallery__item--video">
+            <video controls playsinline preload="metadata" poster="assets/web/highway-selfie.jpg">
+              <source src="assets/web/highway-video.mp4" type="video/mp4" />
+            </video>
+          </figure>
+          <figure class="gallery__item">
+            <img src="assets/web/mehndi-couple.jpg" alt="Mehndi" />
+          </figure>
+          <figure class="gallery__item gallery__item--video">
+            <video controls playsinline preload="metadata" poster="assets/web/roka-couple.jpg">
+              <source src="assets/web/roka-video-1.mp4" type="video/mp4" />
+            </video>
+          </figure>
+          <figure class="gallery__item">
+            <img src="assets/web/roka-portrait.jpg" alt="Roka" />
+          </figure>
+          <figure class="gallery__item gallery__item--video">
+            <video controls playsinline preload="metadata" poster="assets/web/hero-roka.jpg">
+              <source src="assets/web/roka-video-2.mp4" type="video/mp4" />
+            </video>
+          </figure>
+          <figure class="gallery__item">
+            <img src="assets/web/station-gift.jpg" alt="Station gift" />
+          </figure>
+          <figure class="gallery__item">
+            <img src="assets/web/note-constant.png" alt="Hi My Constant — handwritten note" />
+          </figure>
+        </div>
+      </section>
+
+      <!-- Engage: handwritten notes envelope -->
+      <section class="interlude interlude--envelope" data-interlude>
+        <div class="interlude__inner interlude__inner--narrow">
+          <p class="eyebrow is-active">Six notes</p>
+          <h2 class="interlude__title">Letters we kept</h2>
+          <p class="interlude__text">
+            Four from Rahul, two from Ankita — each one a little piece of us.
+            Tap the envelope to open them all.
+          </p>
+          <div class="envelope" data-envelope>
+            <button type="button" class="envelope__seal" data-envelope-open aria-label="Open envelope">
+              <span class="envelope__flap" aria-hidden="true"></span>
+              <span class="envelope__body" aria-hidden="true"></span>
+              <span class="envelope__label">Click to open</span>
+            </button>
+            <div class="envelope__notes" data-envelope-notes>
+              <figure class="envelope__note"><img src="assets/web/note-1.png" alt="Handwritten note — Hi My Constant" loading="lazy" /></figure>
+              <figure class="envelope__note"><img src="assets/web/note-2.png" alt="Handwritten note — one month apology card" loading="lazy" /></figure>
+              <figure class="envelope__note"><img src="assets/web/note-3.png" alt="Handwritten note — flowers card in the car" loading="lazy" /></figure>
+              <figure class="envelope__note"><img src="assets/web/note-4.png" alt="Handwritten note — birthday message" loading="lazy" /></figure>
+              <figure class="envelope__note"><img src="assets/web/note-5.png" alt="Handwritten note — birthday card with roses" loading="lazy" /></figure>
+              <figure class="envelope__note"><img src="assets/web/note-6.png" alt="Handwritten note — safe journey" loading="lazy" /></figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Next milestone -->
+      <section class="interlude interlude--milestone-next" data-interlude>
+        <div class="interlude__inner interlude__inner--narrow">
+          <p class="eyebrow is-active">What's coming next</p>
+          <h2 class="interlude__title">The next milestone</h2>
+          <div class="milestone-next">
+            <p class="milestone-next__label">Coming soon</p>
+            <h3 class="milestone-next__title">100 days together</h3>
+            <p class="milestone-next__date">September 4, 2026</p>
+            <p class="interlude__text">
+              Fifty days were only the beginning. The next chapter is already on
+              the calendar — more drives, more songs, more ordinary days that
+              become extraordinary.
+            </p>
+            <div class="milestone-next__countdown" data-next-milestone aria-live="polite">
+              <span data-next-days>—</span> days to go
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final Chapter -->
+      <section class="final-chapter" data-final-chapter aria-label="Final chapter">
+        <canvas class="final-chapter__stars" data-final-stars aria-hidden="true"></canvas>
+        <div class="final-chapter__hero">
+          <img src="assets/web/hero-roka.jpg" alt="Rahul and Ankita at their roka" />
+        </div>
+        <div class="final-chapter__copy">
+          <p class="final-chapter__eyebrow">Final Chapter</p>
+          <h2 class="final-chapter__title">♾️ Forever Begins</h2>
+          <div class="final-chapter__letter" data-typewriter>
+            <p>Dear Ankita,</p>
+            <p>These fifty days have given me memories I'll cherish forever. Every call, every drive, every handwritten note, every song you sang, every laugh, every goodbye, and every moment we spent together has become a part of who I am.</p>
+            <p>They say love takes time to grow. Somehow, with you, it felt like home from the very beginning.</p>
+            <p>This website isn't just about our first fifty days. It's a reminder that one day, when life gets busy, we can return here and remember how beautifully it all began.</p>
+            <p>Here's to every chapter we've already written… and to all the chapters still waiting for us.</p>
+            <p>I love you.</p>
+            <p class="final-chapter__sign">— Rahul ❤️</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ending animation -->
+      <section class="story-end" data-story-end aria-label="Our story continues">
+        <div class="story-end__fade" data-story-end-fade>
+          <p class="story-end__line" data-story-end-line hidden>Our story has only just begun…</p>
+          <div class="story-end__infinity" data-story-end-infinity hidden aria-hidden="true">♾️</div>
+          <p class="story-end__names" data-story-end-names hidden>Rahul ❤️ Ankita</p>
+          <p class="story-end__dates" data-story-end-dates hidden>28 May 2026 → Forever</p>
+          <button type="button" class="story-end__btn" data-endless-again hidden>Replay the beginning ♡</button>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>Made for Ankita — from Rahul. Endlessly.</p>
+      </footer>
+    </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
