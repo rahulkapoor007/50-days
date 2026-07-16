@@ -10,6 +10,19 @@
   --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --font: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Prefer dynamic viewport on mobile; svh as fallback for older browsers */
+  --vh: 100svh;
+  --card-max-h: min(52svh, 28rem);
+  --card-max-w: 28rem;
+  --opening-max-h: min(58svh, 30rem);
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --vh: 100dvh;
+    --card-max-h: min(52dvh, 28rem);
+    --opening-max-h: min(58dvh, 30rem);
+  }
 }
 
 *,
@@ -38,7 +51,7 @@ body {
 body.is-curtain-locked,
 body.is-gate-locked {
   overflow: hidden;
-  height: 100svh;
+  height: var(--vh);
 }
 
 /* ——— Password gate ——— */
@@ -1093,8 +1106,8 @@ main {
 .scene__pin {
   position: sticky;
   top: 0;
-  height: 100svh;
-  max-height: 100svh;
+  height: var(--vh);
+  max-height: var(--vh);
   overflow: hidden;
 }
 
@@ -1102,15 +1115,17 @@ main {
   position: relative;
   width: 100%;
   height: 100%;
-  max-height: 100svh;
+  max-height: var(--vh);
   display: grid;
   place-items: center;
   overflow: hidden;
+  min-height: 0;
 }
 
 .scene__stage--split {
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: auto minmax(0, 1fr);
   align-content: center;
   align-items: center;
   justify-items: center;
@@ -1118,15 +1133,18 @@ main {
   row-gap: 1.1rem;
   padding: 4.5rem 1.25rem 2.5rem;
   overflow: hidden;
+  min-height: 0;
 }
 
 @media (min-width: 900px) {
   .scene__stage--split {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
     padding: 5rem clamp(2rem, 5vw, 4.5rem) 3rem;
     column-gap: clamp(2rem, 4vw, 3.5rem);
     justify-items: stretch;
     align-items: center;
+    align-content: center;
   }
 
   .scene__stage--flip .scene__media {
@@ -1173,10 +1191,11 @@ main {
 }
 
 .scene__media--card {
-  width: min(100%, 28rem);
+  /* Width is height-aware so max-height never squashes the 3:4 frame */
+  width: min(100%, 28rem, calc(min(52svh, 28rem) * 3 / 4));
   aspect-ratio: 3 / 4;
   height: auto;
-  max-height: min(52vh, 28rem);
+  max-height: min(52svh, 28rem);
   margin: 0 auto;
   border-radius: 1.35rem;
   background: #ebe4df;
@@ -1186,6 +1205,14 @@ main {
   transform: translate3d(0, var(--card-y, 0px), 0) scale(var(--card-scale, 1));
   transition: box-shadow 0.45s var(--ease);
   will-change: transform;
+  flex-shrink: 0;
+}
+
+@supports (height: 100dvh) {
+  .scene__media--card {
+    width: min(100%, 28rem, calc(min(52dvh, 28rem) * 3 / 4));
+    max-height: min(52dvh, 28rem);
+  }
 }
 
 .scene__media--card::after {
@@ -1225,17 +1252,32 @@ main {
 
 @media (min-width: 900px) {
   .scene__media--card {
-    width: 100%;
-    max-width: 32rem;
-    max-height: min(68vh, 34rem);
+    width: min(100%, 32rem, calc(min(68svh, 34rem) * 3 / 4));
+    max-height: min(68svh, 34rem);
     margin: 0;
     justify-self: center;
+  }
+
+  @supports (height: 100dvh) {
+    .scene__media--card {
+      width: min(100%, 32rem, calc(min(68dvh, 34rem) * 3 / 4));
+      max-height: min(68dvh, 34rem);
+    }
   }
 }
 
 .scene__media--note {
-  height: min(48vh, 26rem);
+  height: auto;
+  max-height: min(48svh, 26rem);
+  width: min(100%, 28rem, calc(min(48svh, 26rem) * 3 / 4));
   background: #fffaf4;
+}
+
+@supports (height: 100dvh) {
+  .scene__media--note {
+    max-height: min(48dvh, 26rem);
+    width: min(100%, 28rem, calc(min(48dvh, 26rem) * 3 / 4));
+  }
 }
 
 .scene__frame {
@@ -1288,15 +1330,16 @@ main {
   z-index: 2;
 }
 
-/* Full-bleed hero/roka: cover the stage, keep faces high in frame */
+/* Full-bleed hero/roka: cover the stage, keep faces in frame */
 .scene__media--bleed .scene__frame img {
   object-fit: cover;
-  object-position: center 22%;
+  object-position: center 32%;
   background: #050505;
 }
 
 .scene__media--bleed .scene__frame img.is-active {
   animation: kenburns-bleed 16s ease-in-out infinite alternate;
+  transform-origin: center 40%;
 }
 
 @keyframes kenburns-bleed {
@@ -1308,9 +1351,67 @@ main {
   }
 }
 
+/*
+  Landscape / wide desktops: portrait photos must not be force-cropped
+  into a cinematic letterbox. Pin a phone-shaped frame in the center
+  so the couple stays composed like portrait mode.
+*/
+@media (orientation: landscape) and (min-aspect-ratio: 5 / 4) {
+  .scene__stage:has(> .scene__media--bleed) {
+    background: #050505;
+  }
+
+  .scene__media--bleed {
+    inset: 0;
+    left: 0;
+    right: 0;
+    width: min(100%, calc(var(--vh) * 0.72));
+    max-width: 32rem;
+    height: 100%;
+    margin-inline: auto;
+  }
+
+  .scene__media--bleed .scene__frame img {
+    object-position: center 28%;
+  }
+
+  .scene__media--bleed .scene__frame img.is-active {
+    transform-origin: center 35%;
+  }
+
+  .scene__copy--center {
+    width: min(100% - 2rem, 28rem);
+    padding-inline: 1rem;
+  }
+
+  .scene__copy--center .phrase {
+    font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+  }
+
+  .scene__copy--center .body {
+    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  }
+}
+
+/* Extra-wide screens: keep the portrait panel from getting too wide */
+@media (orientation: landscape) and (min-aspect-ratio: 16 / 9) {
+  .scene__media--bleed {
+    width: min(100%, calc(var(--vh) * 0.62));
+    max-width: 28rem;
+  }
+}
+
 .scene__media--opening {
   aspect-ratio: 9 / 16;
-  max-height: min(58vh, 30rem);
+  width: min(100%, calc(min(58svh, 30rem) * 9 / 16));
+  max-height: min(58svh, 30rem);
+}
+
+@supports (height: 100dvh) {
+  .scene__media--opening {
+    width: min(100%, calc(min(58dvh, 30rem) * 9 / 16));
+    max-height: min(58dvh, 30rem);
+  }
 }
 
 .scene__media--opening .scene__frame img {
@@ -1618,6 +1719,8 @@ main {
   display: grid;
   align-content: start;
   justify-self: center;
+  min-height: 0;
+  max-width: 100%;
 }
 
 @media (min-width: 900px) {
@@ -1625,6 +1728,8 @@ main {
     width: 100%;
     max-width: 32rem;
     justify-self: start;
+    align-self: center;
+    overflow: hidden;
   }
 }
 
@@ -1965,7 +2070,7 @@ main {
 .memory-loader__pin {
   position: sticky;
   top: 0;
-  height: 100svh;
+  height: var(--vh);
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -2504,10 +2609,17 @@ main {
   width: 100%;
   aspect-ratio: 16 / 10;
   height: auto;
-  max-height: min(42vh, 20rem);
+  max-height: min(42svh, 20rem);
+  max-width: 100%;
   object-fit: contain;
   display: block;
   background: #111;
+}
+
+@supports (height: 100dvh) {
+  .clip video {
+    max-height: min(42dvh, 20rem);
+  }
 }
 
 .clip figcaption {
@@ -2696,19 +2808,29 @@ main {
 }
 
 .gallery__item {
-  flex: 0 0 min(70vw, 20rem);
+  flex: 0 0 auto;
+  width: min(70vw, 20rem, calc(min(52svh, 24rem) * 3 / 4));
   margin: 0;
   scroll-snap-align: start;
   border-radius: 1.2rem;
   overflow: hidden;
   background: #d8d2cc;
-  height: min(52vh, 24rem);
+  aspect-ratio: 3 / 4;
+  height: auto;
+  max-height: min(52svh, 24rem);
   isolation: isolate;
   opacity: 0;
   transform: translate3d(24px, 0, 0) scale(0.96);
   transition:
     opacity 0.7s var(--ease-out),
     transform 0.7s var(--ease-out);
+}
+
+@supports (height: 100dvh) {
+  .gallery__item {
+    width: min(70vw, 20rem, calc(min(52dvh, 24rem) * 3 / 4));
+    max-height: min(52dvh, 24rem);
+  }
 }
 
 .gallery__item.is-in {
@@ -3499,12 +3621,21 @@ main {
 
 .final-chapter__hero {
   position: relative;
+  width: min(100%, 28rem, calc(min(60svh, 28rem) * 3 / 4));
   max-width: 28rem;
+  max-height: min(60svh, 28rem);
   margin: 0 auto 2.5rem;
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
   aspect-ratio: 3 / 4;
+}
+
+@supports (height: 100dvh) {
+  .final-chapter__hero {
+    width: min(100%, 28rem, calc(min(60dvh, 28rem) * 3 / 4));
+    max-height: min(60dvh, 28rem);
+  }
 }
 
 .final-chapter__hero img {
@@ -3687,6 +3818,13 @@ main {
     padding: 1.35rem 1.15rem 1.25rem;
     max-height: min(92svh, 40rem);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  @supports (height: 100dvh) {
+    .gate__card {
+      max-height: min(92dvh, 40rem);
+    }
   }
 
   .gate__title {
@@ -3717,41 +3855,66 @@ main {
   }
 
   .scene__stage--split {
-    align-content: start;
+    grid-template-rows: auto minmax(0, 1fr);
+    align-content: stretch;
     align-items: center;
     justify-items: center;
-    row-gap: 0.75rem;
+    row-gap: 0.65rem;
     padding:
-      calc(4.25rem + env(safe-area-inset-top, 0px))
+      calc(3.75rem + env(safe-area-inset-top, 0px))
       1.1rem
-      calc(2.25rem + env(safe-area-inset-bottom, 0px));
+      calc(2rem + env(safe-area-inset-bottom, 0px));
     overflow: hidden;
+    min-height: 0;
   }
 
   .scene__media--card {
-    width: min(100%, 17rem);
-    max-height: min(34vh, 17rem);
+    width: min(100%, 18rem, calc(min(36svh, 18rem) * 3 / 4));
+    max-height: min(36svh, 18rem);
     margin: 0 auto;
     border-radius: 1.1rem;
   }
 
+  @supports (height: 100dvh) {
+    .scene__media--card {
+      width: min(100%, 18rem, calc(min(36dvh, 18rem) * 3 / 4));
+      max-height: min(36dvh, 18rem);
+    }
+  }
+
   .scene__media--opening {
-    max-height: min(36vh, 18rem);
+    width: min(100%, calc(min(38svh, 19rem) * 9 / 16));
+    max-height: min(38svh, 19rem);
+  }
+
+  @supports (height: 100dvh) {
+    .scene__media--opening {
+      width: min(100%, calc(min(38dvh, 19rem) * 9 / 16));
+      max-height: min(38dvh, 19rem);
+    }
   }
 
   .scene__copy--side {
-    width: min(100%, 17rem);
+    width: min(100%, 22rem);
     justify-self: center;
-    align-self: start;
+    align-self: stretch;
     text-align: left;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding-bottom: 0.25rem;
   }
 
   .scene__copy--center {
     width: min(100% - 2rem, 34rem);
     justify-self: center;
     align-self: center;
-    max-height: none;
-    overflow: visible;
+    max-height: min(70svh, 100%);
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding: 0 0.75rem;
   }
 
@@ -3853,7 +4016,9 @@ main {
   }
 
   .clip video {
-    max-height: min(38vh, 16rem);
+    max-height: min(38svh, 16rem);
+    width: 100%;
+    height: auto;
   }
 
   .dates-timeline {
@@ -3889,7 +4054,8 @@ main {
 
   .gallery__item {
     scroll-snap-align: start;
-    flex: 0 0 min(72vw, 16rem);
+    width: min(72vw, 16rem, calc(min(46svh, 18rem) * 3 / 4));
+    max-height: min(46svh, 18rem);
   }
 
   .final-chapter {
@@ -3897,8 +4063,9 @@ main {
   }
 
   .final-chapter__hero {
-    width: min(100%, 18rem);
+    width: min(100%, 18rem, calc(min(48svh, 20rem) * 3 / 4));
     max-width: 18rem;
+    max-height: min(48svh, 20rem);
     margin-bottom: 1.75rem;
   }
 
@@ -3907,7 +4074,7 @@ main {
   }
 
   .story-end {
-    min-height: 100svh;
+    min-height: var(--vh);
     padding: 2.5rem 1.15rem;
   }
 
@@ -3927,18 +4094,25 @@ main {
 
 @media (max-width: 640px) {
   .scene__stage--split {
-    padding-top: calc(3.85rem + env(safe-area-inset-top, 0px));
-    padding-bottom: calc(2.5rem + env(safe-area-inset-bottom, 0px));
-    row-gap: 0.65rem;
+    padding-top: calc(3.5rem + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(2.25rem + env(safe-area-inset-bottom, 0px));
+    row-gap: 0.55rem;
   }
 
   .scene__media--card {
-    width: min(100%, 14.5rem);
-    max-height: min(30vh, 14.5rem);
+    width: min(100%, 16rem, calc(min(34svh, 16rem) * 3 / 4));
+    max-height: min(34svh, 16rem);
+  }
+
+  @supports (height: 100dvh) {
+    .scene__media--card {
+      width: min(100%, 16rem, calc(min(34dvh, 16rem) * 3 / 4));
+      max-height: min(34dvh, 16rem);
+    }
   }
 
   .scene__copy--side {
-    width: min(100%, 14.5rem);
+    width: min(100%, 20rem);
   }
 
   .scene__copy--center .phrase {
@@ -3985,12 +4159,19 @@ main {
 
 @media (max-width: 400px) {
   .scene__media--card {
-    width: min(100%, 12.75rem);
-    max-height: min(28vh, 13rem);
+    width: min(100%, 14rem, calc(min(32svh, 14rem) * 3 / 4));
+    max-height: min(32svh, 14rem);
+  }
+
+  @supports (height: 100dvh) {
+    .scene__media--card {
+      width: min(100%, 14rem, calc(min(32dvh, 14rem) * 3 / 4));
+      max-height: min(32dvh, 14rem);
+    }
   }
 
   .scene__copy--side {
-    width: min(100%, 12.75rem);
+    width: min(100%, 18rem);
   }
 
   .phrase {
@@ -4015,47 +4196,156 @@ main {
   }
 }
 
-/* Short landscape phones / small height viewports */
-@media (max-height: 520px) and (orientation: landscape) {
+/* Desktop / laptop landscape: keep 3:4 cards and fit copy in short viewports */
+@media (min-width: 900px) and (max-height: 860px) {
   .scene__stage--split {
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    padding-block: 4rem 1.5rem;
+    column-gap: 1.5rem;
+  }
+
+  .scene__media--card {
+    width: min(100%, 26rem, calc(min(72svh, 24rem) * 3 / 4));
+    max-height: min(72svh, 24rem);
+  }
+
+  @supports (height: 100dvh) {
+    .scene__media--card {
+      width: min(100%, 26rem, calc(min(72dvh, 24rem) * 3 / 4));
+      max-height: min(72dvh, 24rem);
+    }
+  }
+
+  .scene__media--opening {
+    width: min(100%, calc(min(74svh, 26rem) * 9 / 16));
+    max-height: min(74svh, 26rem);
+  }
+
+  .phrase {
+    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+  }
+
+  .body {
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .families-trees {
+    height: 3rem;
+  }
+}
+
+@media (min-width: 900px) and (max-height: 720px) {
+  .scene__stage--split {
+    padding-block: 3.5rem 1.15rem;
+    column-gap: 1.25rem;
+  }
+
+  .scene__media--card {
+    width: min(100%, 22rem, calc(min(78svh, 20rem) * 3 / 4));
+    max-height: min(78svh, 20rem);
+  }
+
+  @supports (height: 100dvh) {
+    .scene__media--card {
+      width: min(100%, 22rem, calc(min(78dvh, 20rem) * 3 / 4));
+      max-height: min(78dvh, 20rem);
+    }
+  }
+
+  .phrase {
+    font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+    margin-bottom: 0.4rem;
+  }
+
+  .body {
+    font-size: 0.88rem;
+  }
+
+  .eyebrow {
+    margin-bottom: 0.45rem;
+  }
+
+  .families-flow {
+    margin-top: 0.35rem;
+  }
+
+  .opening-sequence {
+    margin-top: 0.4rem;
+    gap: 0.35rem;
+  }
+}
+
+/* Phone / tablet landscape — side-by-side so content isn't crushed */
+@media (max-width: 899px) and (orientation: landscape) and (max-height: 560px) {
+  .gate__card {
+    max-height: min(94svh, 100%);
+    padding: 1rem 1.15rem;
+  }
+
+  .gate__riddle {
+    display: none;
+  }
+
+  .scene__stage--split {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    grid-template-rows: minmax(0, 1fr);
     align-content: center;
     align-items: center;
     column-gap: 1rem;
     row-gap: 0;
-    padding: 3.25rem 1rem 1rem;
+    padding:
+      calc(2.75rem + env(safe-area-inset-top, 0px))
+      1rem
+      calc(0.85rem + env(safe-area-inset-bottom, 0px));
   }
 
   .scene__media--card {
-    width: min(100%, 11rem);
-    max-height: min(70svh, 12rem);
+    width: min(100%, 12rem, calc(min(78svh, 13.5rem) * 3 / 4));
+    max-height: min(78svh, 13.5rem);
+  }
+
+  @supports (height: 100dvh) {
+    .scene__media--card {
+      width: min(100%, 12rem, calc(min(78dvh, 13.5rem) * 3 / 4));
+      max-height: min(78dvh, 13.5rem);
+    }
+  }
+
+  .scene__media--opening {
+    width: min(100%, calc(min(78svh, 14rem) * 9 / 16));
+    max-height: min(78svh, 14rem);
   }
 
   .scene__copy--side {
     width: 100%;
     max-width: none;
+    align-self: center;
+    overflow-y: auto;
   }
 
   .scene__copy--center {
-    padding-top: 2.5rem;
+    padding-top: 0;
+    max-height: min(80svh, 100%);
   }
 
   .scene__copy--center .phrase {
-    font-size: clamp(1.2rem, 4vw, 1.7rem);
+    font-size: clamp(1.15rem, 3.5vw, 1.55rem);
   }
 
   .scene__copy--center .body {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
 
-  .families-flow {
-    display: none;
+  .phrase {
+    font-size: clamp(1.1rem, 3vw, 1.45rem);
   }
 
-  .opening-sequence {
-    display: none;
+  .body {
+    font-size: 0.82rem;
   }
 
+  .families-flow,
+  .opening-sequence,
   .scene__dots {
     display: none;
   }
@@ -4076,7 +4366,15 @@ main {
   }
 
   .scene__media--card {
-    max-height: min(58vh, 24rem);
+    width: min(100%, 26rem, calc(min(58svh, 24rem) * 3 / 4));
+    max-height: min(58svh, 24rem);
+  }
+
+  @supports (height: 100dvh) {
+    .scene__media--card {
+      width: min(100%, 26rem, calc(min(58dvh, 24rem) * 3 / 4));
+      max-height: min(58dvh, 24rem);
+    }
   }
 
   .phrase {
@@ -4110,7 +4408,7 @@ main {
   body.is-curtain-locked,
   body.is-gate-locked {
     overflow: hidden;
-    height: 100svh;
+    height: var(--vh);
   }
 
   .site-shell {
