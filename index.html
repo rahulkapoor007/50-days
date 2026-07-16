@@ -1087,6 +1087,39 @@
         </div>
       </section>
 
+      <!-- A private video note — sealed until she holds the heart -->
+      <section class="video-note" data-video-note aria-label="A private note from Rahul">
+        <div class="video-note__seal" data-video-note-seal>
+          <p class="video-note__whisper">There's one more thing I couldn't write.</p>
+          <button
+            type="button"
+            class="video-note__heart"
+            data-video-note-hold
+            aria-label="Hold to open a private note"
+          >
+            <span class="video-note__heart-ring" aria-hidden="true"></span>
+            <span class="video-note__heart-fill" data-video-note-fill aria-hidden="true"></span>
+            <span class="video-note__heart-icon" aria-hidden="true">♡</span>
+            <span class="video-note__hint">Hold gently</span>
+          </button>
+        </div>
+        <div class="video-note__reveal" data-video-note-reveal hidden>
+          <p class="video-note__label">For Ankita — from Rahul</p>
+          <p class="video-note__sub">Something I wanted you to hear in my voice.</p>
+          <div class="video-note__frame">
+            <video
+              data-video-note-player
+              controls
+              playsinline
+              preload="none"
+              poster="assets/web/video-note-poster.jpg"
+            >
+              <source src="assets/web/video-note.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </section>
+
       <!-- Ending animation -->
       <section class="story-end" data-story-end aria-label="Our story continues">
         <div class="story-end__fade" data-story-end-fade>

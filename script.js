@@ -1352,6 +1352,137 @@
     window.addEventListener("resize", resize, { passive: true });
   };
 
+  const initVideoNote = () => {
+    const section = document.querySelector("[data-video-note]");
+    const holdBtn = section?.querySelector("[data-video-note-hold]");
+    const fill = section?.querySelector("[data-video-note-fill]");
+    const reveal = section?.querySelector("[data-video-note-reveal]");
+    const player = section?.querySelector("[data-video-note-player]");
+    if (!section || !holdBtn || !reveal) return;
+
+    const HOLD_MS = 1800;
+    let holdProgress = 0;
+    let holding = false;
+    let rafId = 0;
+    let holdStarted = 0;
+    let opened = false;
+    let ready = false;
+
+    const setHold = (value) => {
+      holdProgress = clamp(value, 0, 1);
+      section.style.setProperty("--hold", String(holdProgress));
+      if (fill) fill.style.setProperty("--hold", String(holdProgress));
+      holdBtn.style.setProperty("--hold", String(holdProgress));
+    };
+
+    const openNote = () => {
+      if (opened) return;
+      opened = true;
+      holding = false;
+      holdBtn.classList.remove("is-holding");
+      setHold(1);
+      reveal.hidden = false;
+      section.classList.add("is-open");
+      holdBtn.setAttribute("aria-disabled", "true");
+      holdBtn.tabIndex = -1;
+
+      if (player) {
+        // Warm the source only after unlock so it stays a private moment
+        player.preload = "metadata";
+        player.load();
+      }
+
+      if (reduceMotion) return;
+      window.setTimeout(() => {
+        reveal.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 420);
+    };
+
+    const stopHold = () => {
+      if (!holding || opened) return;
+      holding = false;
+      holdBtn.classList.remove("is-holding");
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = 0;
+
+      const unwind = () => {
+        if (holding || opened) return;
+        holdProgress = Math.max(0, holdProgress - 0.04);
+        setHold(holdProgress);
+        if (holdProgress > 0) rafId = requestAnimationFrame(unwind);
+      };
+      rafId = requestAnimationFrame(unwind);
+    };
+
+    const tickHold = (now) => {
+      if (!holding || opened) return;
+      const elapsed = now - holdStarted;
+      setHold(elapsed / HOLD_MS);
+      if (holdProgress >= 1) {
+        openNote();
+        return;
+      }
+      rafId = requestAnimationFrame(tickHold);
+    };
+
+    const startHold = (event) => {
+      if (opened || holding) return;
+      if (event.type === "mousedown" && event.button !== 0) return;
+      holding = true;
+      holdStarted = performance.now();
+      holdBtn.classList.add("is-holding");
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(tickHold);
+    };
+
+    const markReady = () => {
+      if (ready) return;
+      ready = true;
+      section.classList.add("is-ready");
+    };
+
+    if (reduceMotion) {
+      markReady();
+      holdBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openNote();
+      });
+    } else {
+      holdBtn.addEventListener("pointerdown", startHold);
+      holdBtn.addEventListener("pointerup", stopHold);
+      holdBtn.addEventListener("pointerleave", stopHold);
+      holdBtn.addEventListener("pointercancel", stopHold);
+      holdBtn.addEventListener("keydown", (e) => {
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault();
+          if (!holding) startHold(e);
+        }
+      });
+      holdBtn.addEventListener("keyup", (e) => {
+        if (e.key === " " || e.key === "Enter") stopHold();
+      });
+      // Prevent long-press context menus on mobile
+      holdBtn.addEventListener("contextmenu", (e) => e.preventDefault());
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      markReady();
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          markReady();
+          io.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.35 }
+    );
+    io.observe(section);
+  };
+
   const initStoryEnd = () => {
     const section = document.querySelector("[data-story-end]");
     const line = document.querySelector("[data-story-end-line]");
@@ -1536,6 +1667,7 @@
     initEnvelope();
     initNextMilestone();
     initFinalChapter();
+    initVideoNote();
     initStoryEnd();
     initGalleryAudio();
     initBgmPlayer();
