@@ -2668,6 +2668,7 @@ main {
   animation: pulse-dot 1.4s ease-out infinite;
   z-index: 2;
 }
+}
 
 @keyframes pulse-dot {
   0% {

@@ -1168,7 +1168,7 @@
         video.onended = stopActive;
       } catch (_) {
         try {
-          await playAudio(btn, "assets/web/khat.mp3");
+          await playAudio(btn, "assets/web/her-voice-khat.mp3");
         } catch (_) {
           stopActive();
         }
